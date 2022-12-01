@@ -57,6 +57,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #endif
 
 #ifdef OLED_ENABLE
+#   define OLED_IC OLED_IC_SH1106
+#   define OLED_COLUMN_OFFSET 2
 #   define OLED_DISPLAY_128X64
 #   define OLED_TIMEOUT 60000
 #   define OLED_FONT_H "keyboards/anavi/macropad8/glcdfont.c"
