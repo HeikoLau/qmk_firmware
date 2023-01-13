@@ -2,6 +2,7 @@
 
 #define _MAIN 0
 #define _LTSPICE 1
+#define _MEDIA 2
 
 #define KC_X0 LT(_FN, KC_ESC)
 
@@ -13,7 +14,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_LTSPICE] = LAYOUT_ortho_2x4(
      KC_ESC, KC_F2, KC_F3, KC_G,
-     KC_F5,  KC_F7, KC_NO, TO(_MAIN)
+     KC_F5,  KC_F7, KC_NO, TO(_MEDIA)
+  ),
+
+  [_MEDIA] = LAYOUT_ortho_2x4(
+     KC_MUTE, KC_MPLY, KC_NO, KC_G,
+     KC_VOLD, KC_VOLU, KC_NO, TO(_MAIN)
   )
 };
 
@@ -51,6 +57,20 @@ bool oled_task_user(void) {
       oled_write_ln_P(PSTR("ESC  Cmp   Wire  GND"), false);
       oled_write_ln_P(PSTR(""), false);
       snprintf(tmp, sizeof(tmp), "Del  Move          %c", 26);
+      oled_write_ln(tmp, false);
+      break;
+    case _MEDIA:
+      snprintf(tmp, sizeof(tmp), "      %c%c%c%c%c%c%c", 128, 129, 129, 129, 129, 129, 130);
+      oled_write_ln(tmp, false);
+      snprintf(tmp, sizeof(tmp), "      %cMedia%c", 134, 135);
+      oled_write_ln(tmp, false);
+      snprintf(tmp, sizeof(tmp), "      %c%c%c%c%c%c%c", 131, 132, 132, 132, 132, 132, 133);
+      oled_write_ln(tmp, false);
+      oled_write_ln_P(PSTR(""), false);
+      oled_write_ln_P(PSTR(""), false);
+      oled_write_ln_P(PSTR("Mute  Play"), false);
+      oled_write_ln_P(PSTR(""), false);
+      snprintf(tmp, sizeof(tmp), "Down  Up           %c", 26);
       oled_write_ln(tmp, false);
       break;
     default:
